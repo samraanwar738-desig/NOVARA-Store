@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Deals & Offers | NOVAORA</title>
+
+  <meta
+    name="description"
+    content="Discover exclusive deals, limited-time offers and best-selling products at NOVAORA."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================
+       NOVAORA DEALS PAGE
+    ========================== */
+
+    .deals-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255, 220, 180, .20), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(190, 210, 255, .18), transparent 30%),
+        #fafafa;
+      padding-bottom: 80px;
+    }
+
+    .deals-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 70px 24px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(20,20,25,.96),
+          rgba(45,45,55,.90)
+        );
+      color: #fff;
+    }
+
+    .deals-hero::before,
+    .deals-hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .deals-hero::before {
+      width: 320px;
+      height: 320px;
+      background: rgba(255, 183, 77, .16);
+      top: -150px;
+      left: -80px;
+    }
+
+    .deals-hero::after {
+      width: 400px;
+      height: 400px;
+      background: rgba(130, 150, 255, .13);
+      right: -150px;
+      bottom: -220px;
+    }
+
+    .deals-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 850px;
+    }
+
+    .deals-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .deals-hero h1 {
+      margin: 0;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: .95;
+      letter-spacing: -0.045em;
+      font-weight: 900;
+    }
+
+    .deals-hero h1 span {
+      display: block;
+      margin-top: 8px;
+      background: linear-gradient(90deg, #ffd27d, #fff, #ffc3a0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .deals-hero p {
+      max-width: 650px;
+      margin: 25px auto 0;
+      color: rgba(255,255,255,.76);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .deals-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .deal-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 23px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      transition: .25s ease;
+    }
+
+    .deal-btn.primary {
+      background: #fff;
+      color: #171717;
+    }
+
+    .deal-btn.secondary {
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      background: rgba(255,255,255,.07);
+    }
+
+    .deal-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .deals-wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .deal-stats {
+      position: relative;
+      z-index: 4;
+      margin-top: -45px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .deal-stat {
+      padding: 24px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.08);
+      text-align: center;
+    }
+
+    .deal-stat strong {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .deal-stat span {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .deal-section {
+      padding-top: 75px;
+    }
+
+    .deal-section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .deal-section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -.03em;
+    }
+
+    .deal-section-head p {
+      margin: 8px 0 0;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    .deal-section-link {
+      color: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .deal-section-link:hover {
+      text-decoration: underline;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .offer-card {
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: 22px;
+      padding: 28px;
+      color: #fff;
+      background: linear-gradient(135deg, #222, #555);
+      box-shadow: 0 14px 35px rgba(0,0,0,.09);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .offer-card:nth-child(2) {
+      background: linear-gradient(135deg, #50362d, #9c6951);
+    }
+
+    .offer-card:nth-child(3) {
+      background: linear-gradient(135deg, #273444, #536b85);
+    }
+
+    .offer-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0,0,0,.14);
+    }
+
+    .offer-card::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.10);
+      right: -50px;
+      bottom: -70px;
+    }
+
+    .offer-label {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .offer-card h3 {
+      position: relative;
+      z-index: 2;
+      margin: 25px 0 8px;
+      font-size: 25px;
+    }
+
+    .offer-card p {
+      position: relative;
+      z-index: 2;
+      max-width: 280px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .offer-discount {
+      position: absolute;
+      right: 22px;
+      top: 25px;
+      font-size: 38px;
+      font-weight: 950;
+      letter-spacing: -.06em;
+      opacity: .95;
+    }
+
+    .deal-products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .deal-product {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 20px;
+      padding: 20px;
+      transition: .25s ease;
+    }
+
+    .deal-product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 45px rgba(0,0,0,.08);
+    }
+
+    .deal-product-image {
+      aspect-ratio: 1 / 1;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #f1f1f1;
+      margin-bottom: 17px;
+    }
+
+    .deal-product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .deal-product small {
+      color: #888;
+      font-weight: 700;
+    }
+
+    .deal-product h3 {
+      margin: 7px 0;
+      font-size: 18px;
+    }
+
+    .deal-price {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .deal-price strong {
+      font-size: 20px;
+    }
+
+    .deal-price del {
+      color: #999;
+      font-size: 14px;
+    }
+
+    .deal-tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #f4f4f4;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .deal-banner {
+      margin-top: 70px;
+      border-radius: 25px;
+      padding: 45px;
+      background: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .deal-banner h2 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 43px);
+    }
+
+    .deal-banner p {
+      margin: 0;
+      color: rgba(255,255,255,.68);
+    }
+
+    @media (max-width: 850px) {
+      .offer-grid,
+      .deal-products {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .deal-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .deal-stat {
+        padding: 20px;
+      }
+
+      .deal-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .deals-hero {
+        min-height: 390px;
+        padding: 55px 18px;
+      }
+
+      .deals-wrap {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .deal-section {
+        padding-top: 55px;
+      }
+
+      .offer-grid,
+      .deal-products {
+        grid-template-columns: 1fr;
+      }
+
+      .deal-section-head {
+        display: block;
+      }
+
+      .deal-section-link {
+        display: inline-block;
+        margin-top: 14px;
+      }
+
+      .deal-banner {
+        padding: 30px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="deals">
+
+  <a class="skip" href="#app">Skip to content</a>
+
+  <div id="hdr"></div>
+
+  <main id="app">
+
+    <section class="deals-page">
+
+      <!-- HERO -->
+      <section class="deals-hero">
+        <div class="deals-hero-content">
+
+          <div class="deals-badge">
+            ✦ NOVAORA Exclusive Offers
+          </div>
+
+          <h1>
+            Deals Made
+            <span>For You.</span>
+          </h1>
+
+          <p>
+            Save more on the things you love. Discover limited-time
+            discounts, special offers and hand-picked deals across NOVAORA.
+          </p>
+
+          <div class="deals-actions">
+            <a href="shop.html" class="deal-btn primary">
+              Shop All Deals
+            </a>
+
+            <a href="#offers" class="deal-btn secondary">
+              Explore Offers
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+
+      <div class="deals-wrap">
+
+        <!-- STATS -->
+        <section class="deal-stats">
+
+          <div class="deal-stat">
+            <strong>Up to 50%</strong>
+            <span>Selected Products</span>
+          </div>
+
+          <div class="deal-stat">
+            <strong>Limited Time</strong>
+            <span>Exclusive Offers</span>
+          </div>
+
+          <div class="deal-stat">
+            <strong>Best Value</strong>
+            <span>Everyday Savings</span>
+          </div>
+
+        </section>
+
+
+        <!-- OFFERS -->
+        <section class="deal-section" id="offers">
+
+          <div class="deal-section-head">
+            <div>
+              <h2>Today's Best Offers</h2>
+              <p>Grab your favorites before these offers disappear.</p>
+            </div>
+
+            <a href="shop.html" class="deal-section-link">
+              View All Products →
+            </a>
+          </div>
+
+
+          <div class="offer-grid">
+
+            <article class="offer-card">
+              <span class="offer-label">Hot Deal</span>
+
+              <div class="offer-discount">
+                30%
+              </div>
+
+              <h3>Fashion Edit</h3>
+
+              <p>
+                Refresh your wardrobe with stylish picks and seasonal
+                favorites at special prices.
+              </p>
+            </article>
+
+
+            <article class="offer-card">
+              <span class="offer-label">Beauty Sale</span>
+
+              <div class="offer-discount">
+                35%
+              </div>
+
+              <h3>Beauty Essentials</h3>
+
+              <p>
+                Treat yourself to skincare and beauty essentials without
+                breaking the budget.
+              </p>
+            </article>
+
+
+            <article class="offer-card">
+              <span class="offer-label">Tech Picks</span>
+
+              <div class="offer-discount">
+                25%
+              </div>
+
+              <h3>Smart Tech Deals</h3>
+
+              <p>
+                Upgrade your everyday setup with selected electronics
+                available for less.
+              </p>
+            </article>
+
+          </div>
+
+        </section>
+
+
+        <!-- FEATURED DEAL PRODUCTS -->
+        <section class="deal-section">
+
+          <div class="deal-section-head">
+            <div>
+              <h2>Deal Picks</h2>
+              <p>Popular products currently available at special prices.</p>
+            </div>
+          </div>
+
+
+          <div class="deal-products">
+
+            <article class="deal-product">
+
+              <div class="deal-product-image">
+                <img
+                  src="https://storage.coreldrawdesign.com/previews/preview-trending-fashion-sale-clothes-offer-clothes-sale-banner-designs-1709372572.webp"
+                  alt="Fashion deal"
+                >
+              </div>
+
+              <small>FASHION</small>
+
+              <h3>Seasonal Fashion Picks</h3>
+
+              <div class="deal-price">
+                <strong>30% OFF</strong>
+              </div>
+
+              <span class="deal-tag">
+                Limited Offer
+              </span>
+
+            </article>
+
+
+            <article class="deal-product">
+
+              <div class="deal-product-image">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIweGP3EJEQ7LYexK0zN2dCpqoFWjL2nFY3YINmUqa5kq7ZkbA2NL6SNU&s=10"
+                  alt="Beauty deal"
+                >
+              </div>
+
+              <small>BEAUTY</small>
+
+              <h3>Beauty Essentials</h3>
+
+              <div class="deal-price">
+                <strong>35% OFF</strong>
+              </div>
+
+              <span class="deal-tag">
+                Best Seller
+              </span>
+
+            </article>
+
+
+            <article class="deal-product">
+
+              <div class="deal-product-image">
+                <img
+                  src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/phones-and-gadgets-flyer-design-template-b8b988aa68affc6468a37a6d3fa344ab_screen.jpg?ts=1749799955"
+                  alt="Electronics deal"
+                >
+              </div>
+
+              <small>ELECTRONICS</small>
+
+              <h3>Tech Essentials</h3>
+
+              <div class="deal-price">
+                <strong>25% OFF</strong>
+              </div>
+
+              <span class="deal-tag">
+                Hot Deal
+              </span>
+
+            </article>
+
+          </div>
+
+        </section>
+
+
+        <!-- FINAL CTA -->
+        <section class="deal-banner">
+
+          <div>
+            <h2>Don't Miss the Next Deal.</h2>
+
+            <p>
+              Explore NOVAORA and find something worth adding to your cart.
+            </p>
+          </div>
+
+          <a href="shop.html" class="deal-btn primary">
+            Start Shopping →
+          </a>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="ftr"></div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
